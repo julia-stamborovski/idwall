@@ -4,6 +4,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 from idwall.models import WantedPerson
 
@@ -24,7 +26,7 @@ def scrape_fbi_website():
 
     for person in wanted_persons:
         title_element = person.find_element(By.CSS_SELECTOR, 'h3 > a')
-        name_wanted = title_element.text
+      
 
         # scroll
         driver.execute_script("arguments[0].scrollIntoView(true);", title_element)
@@ -33,17 +35,25 @@ def scrape_fbi_website():
         # click
         driver.execute_script("arguments[0].click();", title_element)
         sleep(2)
-
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'wanted-person-wrapper')))
         #  os dados dos detalhes da pessoa procurada aqui
-       
+        wanted_persons_details = driver.find_elements(By.CLASS_NAME, 'wanted-person-wrapper')
+        name_wanted_details = wanted_persons_details[0].find_element(By.CLASS_NAME, 'documentFirstHeading').text
+        summary = wanted_persons_details[0].find_element(By.CLASS_NAME, 'summary').text
+        image = wanted_persons_details[0].find_element(By.TAG_NAME, 'img').get_attribute('src')
+        
+        
         # back iterando
         driver.execute_script("window.history.go(-1)")
         sleep(2)
+       
         data = {
-            'name': name_wanted,
+            'name': name_wanted_details,
+            'crimes_committed': summary,
+            'photo': image,
            
         }
-
+        print ("Nome", data['name'],"\n" "Descrição do crime:", data['crimes_committed'], "\n" "Imagem", data['photo'])
         extracted_data.append(data)
 
     driver.quit()
@@ -57,7 +67,7 @@ def scrape_fbi_website():
     return extracted_data
 
 
-def scrape_interpol_website():
+""" def scrape_interpol_website():
     driver_path = ChromeDriverManager().install()
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -90,22 +100,22 @@ def scrape_interpol_website():
 
     driver.quit()
     logging.info("Extração de dados da Interpol concluída.")
-    return extracted_data
+    return extracted_data """
 
 
 logging.info("Iniciando web scraping.")
 
 fbi_data = scrape_fbi_website()
-interpol_data = scrape_interpol_website()
+#interpol_data = scrape_interpol_website()
 
-logging.info(f"Total de dados extraídos: {len(fbi_data) + len(interpol_data)}")
+logging.info(f"Total de dados extraídos: {len(fbi_data)}")
 
-for data in fbi_data + interpol_data:
+""" for data in fbi_data :
     wanted_person = WantedPerson(**data)
     try:
         wanted_person.save()
         logging.info(f"Dados salvos para {wanted_person.name}.")
     except Exception as e:
-        logging.error(f"Erro ao salvar dados para {wanted_person.name}: {str(e)}")
+        logging.error(f"Erro ao salvar dados para {wanted_person.name}: {str(e)}") """
 
 logging.info("Finalizando scraping.")
