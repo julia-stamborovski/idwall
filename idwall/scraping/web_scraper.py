@@ -105,17 +105,18 @@ def scrape_fbi_website():
 
 logging.info("Iniciando web scraping.")
 
+
 fbi_data = scrape_fbi_website()
 #interpol_data = scrape_interpol_website()
 
 logging.info(f"Total de dados extraídos: {len(fbi_data)}")
 
-""" for data in fbi_data :
+for data in fbi_data :
     wanted_person = WantedPerson(**data)
     try:
-        wanted_person.save()
+        #wanted_person.save()
         logging.info(f"Dados salvos para {wanted_person.name}.")
     except Exception as e:
-        logging.error(f"Erro ao salvar dados para {wanted_person.name}: {str(e)}") """
+        logging.error(f"Erro ao salvar dados para {wanted_person.name}: {str(e)}")
 
 logging.info("Finalizando scraping.")
