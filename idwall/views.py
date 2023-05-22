@@ -1,12 +1,12 @@
-from rest_framework.views import APIView
+""" from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import WantedPerson
 from .serializers import WantedPersonSerializer
-from .scraping.web_scraper import scrape_fbi_website #, scrape_interpol_website
+from .scraping.web_scraper import scrape_fbi_website #, scrape_interpol_website """
 from django.shortcuts import render
-from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi
-
+#from drf_yasg.utils import swagger_auto_schema
+#from drf_yasg import openapi
+""" 
 class WantedPersonListView(APIView):
     @swagger_auto_schema(
         operation_description="Obtém a lista de pessoas procuradas",
@@ -45,6 +45,6 @@ class WantedPersonDetailView(APIView):
         wanted_person = WantedPerson.objects.get(pk=pk)
         serializer = WantedPersonSerializer(wanted_person)
         return Response(serializer.data)
-
+"""
 def home(request):
-    return render(request, 'index.html')
+    return render(request, 'index.html') 
