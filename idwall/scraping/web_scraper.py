@@ -3,6 +3,7 @@ import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -13,17 +14,21 @@ logging.basicConfig(level=logging.INFO)
 
 print(WantedPerson.objects.all())
 
-def scrape_fbi_website():
-    driver_path = ChromeDriverManager().install()
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    service = webdriver.chrome.service.Service(driver_path)
-    driver = webdriver.Chrome(service=service, options=chrome_options)
-    driver.get('https://www.fbi.gov/wanted/cyber')
+def scrape_fbi_website(self):
+    options = Options()
+    options.add_argument("--no-sandbox")
+    options.add_argument("--headless")
+    options.add_argument("--disable-dev-shm-usage")
+    self.driver = webdriver.Remote(
+        command_executor='http://selenium:4444/wd/hub',
+        desired_capabilities=DeprecationWarning.CHROME.copy(),
+        options=options
+)
+    options.get('https://www.fbi.gov/wanted/cyber')
     sleep(5)
     logging.info("Extração de dados do site do FBI iniciada.")
 
-    wanted_persons = driver.find_elements(By.CLASS_NAME, 'portal-type-person')
+    wanted_persons = options.find_elements(By.CLASS_NAME, 'portal-type-person')
     extracted_data = []
     existing_names = [wanted_person.name for wanted_person in WantedPerson.objects.all()]
     for person in wanted_persons:
@@ -36,22 +41,22 @@ def scrape_fbi_website():
 
 
         # scroll
-        driver.execute_script("arguments[0].scrollIntoView(true);", title_element)
+        options.execute_script("arguments[0].scrollIntoView(true);", title_element)
         sleep(1)
 
         # click
-        driver.execute_script("arguments[0].click();", title_element)
+        options.execute_script("arguments[0].click();", title_element)
         sleep(2)
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'wanted-person-wrapper')))
+        WebDriverWait(options, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'wanted-person-wrapper')))
         #  os dados dos detalhes da pessoa procurada aqui
-        wanted_persons_details = driver.find_elements(By.CLASS_NAME, 'wanted-person-wrapper')
+        wanted_persons_details = options.find_elements(By.CLASS_NAME, 'wanted-person-wrapper')
         name_wanted_details = wanted_persons_details[0].find_element(By.CLASS_NAME, 'documentFirstHeading').text
         summary = wanted_persons_details[0].find_element(By.CLASS_NAME, 'summary').text
         image = wanted_persons_details[0].find_element(By.TAG_NAME, 'img').get_attribute('src')
         
         existing_names.append(name_wanted_details)
         # back iterando
-        driver.execute_script("window.history.go(-1)")
+        options.execute_script("window.history.go(-1)")
         sleep(2)
        
         data = {
@@ -65,7 +70,7 @@ def scrape_fbi_website():
         print ("Nome", data['name'],"\n" "Descrição do crime:", data['crimes_committed'], "\n" "Imagem", data['photo'])
         extracted_data.append(data)
 
-    driver.quit()
+    options.quit()
 
     for data in extracted_data:
         print("Nome:", data['name'])
