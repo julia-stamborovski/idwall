@@ -61,6 +61,7 @@ def scrape_fbi_website():
 
            
         }
+        
         print ("Nome", data['name'],"\n" "Descrição do crime:", data['crimes_committed'], "\n" "Imagem", data['photo'])
         extracted_data.append(data)
 

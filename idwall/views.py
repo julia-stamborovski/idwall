@@ -28,6 +28,7 @@ class WantedPersonListView(APIView):
 
 class WantedPersonDetailView(APIView):
     @swagger_auto_schema(
+        produces=['application/json', 'application/xml'],
         operation_description="Obtém detalhes de uma pessoa procurada",
         manual_parameters=[
             openapi.Parameter(
