@@ -1,20 +1,21 @@
-""" from rest_framework.views import APIView
-from rest_framework.response import Response
-from .models import WantedPerson
-from .serializers import WantedPersonSerializer
+""" 
 from .scraping.web_scraper import scrape_fbi_website #, scrape_interpol_website  """
 from django.shortcuts import render
-""" from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi """
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi 
+from .models import WantedPerson
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .serializers import WantedPersonSerializer
 
-""" class WantedPersonListView(APIView):
+class WantedPersonListView(APIView):
     @swagger_auto_schema(
         operation_description="Obtém a lista de pessoas procuradas",
         responses={200: WantedPersonSerializer(many=True)},
     )
     def get(self, request):
         # Chama as funções de web scraping e obtém os dados coletados
-        fbi_data = scrape_fbi_website()
+        #fbi_data = scrape_fbi_website()
         #interpol_data = scrape_interpol_website()
 
         # Serializa os dados do banco de dados
@@ -22,9 +23,9 @@ from drf_yasg import openapi """
         serializer = WantedPersonSerializer(wanted_persons, many=True)
 
         # Combina os dados do web scraping com os dados do banco de dados
-        combined_data = serializer.data + fbi_data #+ interpol_data
+        #combined_data = serializer.data + fbi_data #+ interpol_data
         
-        return Response(combined_data)
+        #return Response(combined_data)
 
 class WantedPersonDetailView(APIView):
     @swagger_auto_schema(
@@ -45,6 +46,6 @@ class WantedPersonDetailView(APIView):
         wanted_person = WantedPerson.objects.get(pk=pk)
         serializer = WantedPersonSerializer(wanted_person)
         return Response(serializer.data)
- """
+
 def home(request):
     return render(request, 'index.html') 

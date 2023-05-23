@@ -31,7 +31,7 @@ Python
 Django 4.2
 
 # Banco de Dados
-SQLite
+Postgree
 
 # Bibliotecas Principais 
 🕵️‍♀️  **Django REST Framework** (djangorestframework==3.14.0): Biblioteca para
