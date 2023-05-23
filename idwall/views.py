@@ -25,7 +25,7 @@ class WantedPersonListView(APIView):
         # Combina os dados do web scraping com os dados do banco de dados
         #combined_data = serializer.data + fbi_data #+ interpol_data
         
-        #return Response(combined_data)
+        return Response(serializer.data)
 
 class WantedPersonDetailView(APIView):
     @swagger_auto_schema(
