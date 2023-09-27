@@ -1,5 +1,6 @@
 import logging
 import requests
+import undetected_chromedriver as uc
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.common.by import By
@@ -11,8 +12,7 @@ from idwall.models import WantedPerson
 logging.basicConfig(level=logging.INFO)
 
 def scrape_fbi_website():
-    options = FirefoxOptions()
-    driver = webdriver.Firefox(options=options)
+    driver = uc.Chrome()
     driver.get('https://www.fbi.gov/wanted/cyber')
     sleep(5)
     logging.info("Extração de dados do site do FBI iniciada.")

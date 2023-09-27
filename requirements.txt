@@ -49,8 +49,10 @@ trio==0.22.0
 trio-websocket==0.10.2
 typing_extensions==4.5.0
 tzdata==2023.3
+undetected-chromedriver==3.5.3
 uritemplate==4.1.1
 urllib3==2.0.2
 virtualenv==20.21.0
-webdriver-manager==3.8.6
+webdriver-manager==4.0.1
+websockets==11.0.3
 wsproto==1.2.0
