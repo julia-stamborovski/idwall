@@ -89,7 +89,7 @@ WSGI_APPLICATION = "scrapingIdwall.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-""" DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('DB_NAME', str(os.getenv('NAME'))),
@@ -98,12 +98,12 @@ WSGI_APPLICATION = "scrapingIdwall.wsgi.application"
         'HOST': 'localhost',
         'PORT': '5432',
     }
-} """
+} 
 
-import dj_database_url
-DATABASES = {
-    'default': dj_database_url.parse(env('DATABASE_URL'))
-}
+#import dj_database_url
+#DATABASES = {
+ #   'default': dj_database_url.parse(env('DATABASE_URL'))
+#}
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 

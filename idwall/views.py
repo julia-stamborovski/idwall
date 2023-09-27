@@ -1,4 +1,4 @@
-""" 
+
 from .scraping.web_scraper import scrape_fbi_website #, scrape_interpol_website  """
 from django.shortcuts import render
 from drf_yasg.utils import swagger_auto_schema
@@ -15,7 +15,7 @@ class WantedPersonListView(APIView):
     )
     def get(self, request):
         # Chama as funções de web scraping e obtém os dados coletados
-        #fbi_data = scrape_fbi_website()
+        fbi_data = scrape_fbi_website()
         #interpol_data = scrape_interpol_website()
 
         # Serializa os dados do banco de dados
@@ -23,7 +23,7 @@ class WantedPersonListView(APIView):
         serializer = WantedPersonSerializer(wanted_persons, many=True)
 
         # Combina os dados do web scraping com os dados do banco de dados
-        #combined_data = serializer.data + fbi_data #+ interpol_data
+        combined_data = serializer.data + fbi_data #+ interpol_data
         
         return Response(serializer.data)
 
