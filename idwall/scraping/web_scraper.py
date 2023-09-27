@@ -1,8 +1,7 @@
 import logging
 import requests
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -12,11 +11,8 @@ from idwall.models import WantedPerson
 logging.basicConfig(level=logging.INFO)
 
 def scrape_fbi_website():
-    driver_path = ChromeDriverManager().install()
-    chrome_options = Options()
-    #chrome_options.add_argument("--headless")
-    service = webdriver.chrome.service.Service(driver_path)
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    options = FirefoxOptions()
+    driver = webdriver.Firefox(options=options)
     driver.get('https://www.fbi.gov/wanted/cyber')
     sleep(5)
     logging.info("Extração de dados do site do FBI iniciada.")
