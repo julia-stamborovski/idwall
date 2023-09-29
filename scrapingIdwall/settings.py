@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path, os
 from dotenv import load_dotenv
 
-import environ 
+import environ
 
 env = environ.Env()
 
@@ -28,16 +28,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 load_dotenv()
-SECRET_KEY = str(os.getenv('SECRET_KEY'))
+SECRET_KEY = str(os.getenv("SECRET_KEY"))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'challengeidwall.onrender.com',
-    '127.0.0.1' ,
+    "challengeidwall.onrender.com",
+    "127.0.0.1",
 ]
-
 
 
 # Application definition
@@ -52,7 +51,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "idwall.apps.IdwallConfig",
     "drf_yasg",
-  
 ]
 
 MIDDLEWARE = [
@@ -70,7 +68,7 @@ ROOT_URLCONF = "scrapingIdwall.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -90,20 +88,19 @@ WSGI_APPLICATION = "scrapingIdwall.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME', str(os.getenv('NAME'))),
-        'USER': os.environ.get('DB_USER', str(os.getenv('USER'))),
-        'PASSWORD': os.environ.get('DB_PASS', str(os.getenv('PASSWORD'))),
-        'HOST': 'localhost',
-        'PORT': '5432',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        "OPTIONS": {
+            "timeout": 20,
+        },
     }
-} 
+}
 
-#import dj_database_url
-#DATABASES = {
- #   'default': dj_database_url.parse(env('DATABASE_URL'))
-#}
+# import dj_database_url
+# DATABASES = {
+#   'default': dj_database_url.parse(env('DATABASE_URL'))
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -139,13 +136,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 
-
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
-STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = os.path.join(BASE_DIR, "assets")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

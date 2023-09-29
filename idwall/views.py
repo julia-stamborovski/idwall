@@ -1,12 +1,12 @@
-
-from .scraping.web_scraper import scrape_fbi_website #, scrape_interpol_website  """
+# from .scraping.web_scraper import scrape_fbi_website
 from django.shortcuts import render
 from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi 
+from drf_yasg import openapi
 from .models import WantedPerson
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import WantedPersonSerializer
+
 
 class WantedPersonListView(APIView):
     @swagger_auto_schema(
@@ -14,29 +14,26 @@ class WantedPersonListView(APIView):
         responses={200: WantedPersonSerializer(many=True)},
     )
     def get(self, request):
-        # Chama as funções de web scraping e obtém os dados coletados
-        fbi_data = scrape_fbi_website()
-        #interpol_data = scrape_interpol_website()
+        # extracted_data = scrape_fbi_website()
 
-        # Serializa os dados do banco de dados
         wanted_persons = WantedPerson.objects.all()
         serializer = WantedPersonSerializer(wanted_persons, many=True)
 
-        # Combina os dados do web scraping com os dados do banco de dados
-        combined_data = serializer.data + fbi_data #+ interpol_data
-        
+        # combined_data = serializer.data + extracted_data
+
         return Response(serializer.data)
+
 
 class WantedPersonDetailView(APIView):
     @swagger_auto_schema(
-        produces=['application/json', 'application/xml'],
+        produces=["application/json", "application/xml"],
         operation_description="Obtém detalhes de uma pessoa procurada",
         manual_parameters=[
             openapi.Parameter(
-                name='name',
+                name="name",
                 in_=openapi.IN_PATH,
                 type=openapi.TYPE_INTEGER,
-                description='ID da pessoa procurada',
+                description="ID da pessoa procurada",
                 required=True,
             ),
         ],
@@ -47,5 +44,6 @@ class WantedPersonDetailView(APIView):
         serializer = WantedPersonSerializer(wanted_person)
         return Response(serializer.data)
 
+
 def home(request):
-    return render(request, 'index.html') 
+    return render(request, "index.html")
