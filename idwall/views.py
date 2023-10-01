@@ -1,4 +1,4 @@
-# from .scraping.web_scraper import scrape_fbi_website
+from .scraping.web_scraper import scrape_fbi_website
 from django.shortcuts import render
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
@@ -14,12 +14,12 @@ class WantedPersonListView(APIView):
         responses={200: WantedPersonSerializer(many=True)},
     )
     def get(self, request):
-        # extracted_data = scrape_fbi_website()
+        extracted_data = scrape_fbi_website()
 
         wanted_persons = WantedPerson.objects.all()
         serializer = WantedPersonSerializer(wanted_persons, many=True)
 
-        # combined_data = serializer.data + extracted_data
+        combined_data = serializer.data + extracted_data
 
         return Response(serializer.data)
 
