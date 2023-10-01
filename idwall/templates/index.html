@@ -1,74 +1,189 @@
 % load static %
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>challenge idwall - fiap</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <style>
         body {
-            background-color: #0f0e17;
-        }
-        h1, p {
-            padding-top: 40px;
-            text-align: center;
-            font-family: 'Staatliches', cursive;
-        }
-        h1
-        {
-            color: #fffffe;
-        }
-        p
-        {
-            color: #a7a9be ;
-        }
- 
-        .button-33 {
-        background-color: #c2fbd7;
-        margin-top: 10px;
-        border-radius: 100px;
-        box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
-        color: green;
-        cursor: pointer;
-        display: inline-block;
-        font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
-        padding: 7px 20px;
-        text-align: center;
-        text-decoration: none;
-        transition: all 250ms;
-        border: 0;
-        font-size: 16px;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-        text-align: center;
- 
+            background-color: #0A070E;
+            color: #fff;
+            font-family: 'Open Sans', sans-serif;
+
         }
 
-        .button-33:hover {
-        box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
-        transform: scale(1.05) rotate(-1deg);
+        .img-banner {
+            object-fit: cover;
+            height: 600px;
+            width: 600px;
         }
+
+        .parent {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(1, 1fr);
+            grid-column-gap: 0px;
+            grid-row-gap: 0px;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .div1 {
+            grid-area: 1 / 1 / 2 / 4;
+            margin-left: 4rem;
+            margin-right: 1rem;
+        }
+
+        .div2 {
+            grid-area: 1 / 4 / 2 / 6;
+        }
+
+        .title {
+            font-size: 5rem;
+            color: #7f5af0;
+        }
+
+        .subtitle {
+            font-size: 2rem;
+            text-transform: uppercase;
+            color: #94a1b2;
+        }
+
+        .button-banner {
+            text-align: center;
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .h2-title {
+            text-align: center;
+
+        }
+
+        .text-center {
+            text-align: start;
+            margin-bottom: 2rem;
+            margin-top: 1rem;
+            color: #7f5af0;
+            text-transform: uppercase;
+        }
+
+        .document {
+            margin-right: 5rem;
+            margin-left: 5rem;
+        }
+
         .blocktext {
-        margin-left: auto;
-        margin-right: auto;
-        width: 6em;
-       
+            text-align: center;
+            padding-bottom: 5rem;
+        }
+
+        .button-swagger {
+            padding: 1rem 4rem;
+            background-color: #7f5af0;
+            color: #fffffe;
+            font-size: 3rem;
+            text-decoration: none;
+            box-shadow: rgba(55, 1, 253, 0.5) 0px 25px 50px -12px;
+        }
+
+        .list-style {
+            list-style: none;
+        }
+
+        .footer {
+            font-size: 2rem;
+            text-transform: uppercase;
+            color: #94a1b2;
+            text-align: center;
+
         }
     </style>
 
-<main>
-    <h1>Wanted by the fbi</h1>
-    <p>challenge idwall</p>
-<div class="blocktext">
-    <a class="button-33" role="button" href="{%url 'schema-swagger-ui' %}">swagger</a>
-</div>
-</main>
+    <main>
+        <div class="parent">
+            <div class="div1">
+                <h1 class="title">Wanted by the FBI </h1>
+                <p class="subtitle">challenge idwall 2 etapa - FIAP 👻</p>
+            </div>
+            <div class="div2">
+                <img class='img-banner'
+                    src="https://images.unsplash.com/photo-1680086720336-10811d4a4626?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80"
+                    alt="3d render ilustração" />
+            </div>
+
+        </div>
+        <div class="blocktext">
+            <a class="button-swagger" role="button" href="{%url 'schema-swagger-ui' %}">swagger</a>
+            <p>⇩ Veja abaixo, mais sobre esse projeto. ⇩</p>
+        </div>
+
+        <h2 class="h2-title">Desafios e Soluções na Aquisição de Dados do FBI</h2>
+        <section class="document">
+            <h3 class="text-center">Introdução</h3>
+            <p>Na primeira etapa do nosso projeto, enfrentamos uma série de desafios complexos
+                e intrigantes ao coletar dados diretamente da página oficial do FBI. Este texto
+                discutirá os principais obstáculos que enfrentamos e as estratégias que empregamos
+                para superá-los.
+            </p>
+            <h4 class="text-center"> Desafio 1: <strong>Bloqueios de Segurança</strong></h4>
+            <p>Um dos maiores desafios enfrentados foi lidar com os bloqueios de segurança implementados
+                nas páginas do FBI. Esses bloqueios frequentes estavam afetando nossa capacidade de coletar dados
+                de forma eficaz. Para contornar essa questão, pesquisamos a fundo e entendemos como funcionava
+                a lógica por trás desses bloqueios de segurança e implementamos um driver de automatização diferente, o
+                "<a href="https://pypi.org/project/undetected-chromedriver/">undetected-chromedriver </a>", que nos
+                permitiu
+                contornar os bloqueios de segurança.
+            </p>
+            <h4 class="text-center"> Desafio 2: <strong>Estrutura das Páginas Web</strong></h4>
+            <p>Outro desafio significativo estava relacionado à estrutura "variável" das páginas web do FBI.
+                A estrutura das páginas mudava, o que tornou a automatização da extração dos dados de maneira
+                consistente uma tarefa
+                difícil. Apesar desse desafio, conseguimos desenvolver métodos de seleção de elementos que funcionaram
+                na maioria dos casos, garantindo que pudéssemos coletar as informações necessárias.
+            </p>
+            <h4 class="text-center">Tecnologias Utilizadas:</h4>
+            <p>Para superar esses desafios, utilizamos uma combinação de tecnologias e ferramentas:</p>
+            <ul class="list-style">
+                <li> 👻 IDE: Visual Studio Code</li>
+                <li> 👻 Selenium <small>(para automação)</small></li>
+                <li> 👻 Python <small>(para programação)</small></li>
+                <li> 👻 Django <small>(para gerenciamento de dados)</small></li>
+                <li> 👻 Swagger <small>(API)</small></li>
+                <li> 👻 SQLite <small>(como banco de dados)</small></li>
+                <li> 👻 HTML e CSS <small>(para estilização)</small></li>
+            </ul>
+
+            <h4 class="text-center" s>Garantia de Qualidade de Dados:</h4>
+            <p> Implementamos uma estratégia que garantia a qualidade e a
+                integridade dos dados coletados. Após a coleta de dados, os mesmos eram armazenados em nosso banco de
+                dados SQLite, proporcionando aos usuários acesso
+                a informações atualizadas por meio de um painel administrativo e uma API.</p>
+
+            <h4 class="text-center">Impacto positivo no banco de dados:</h4>
+            <p>A aquisição de dados bem-sucedida teve um impacto significativo no nosso banco de dados. Conseguimos
+                manter atualizações em tempo real, o que enriqueceu consideravelmente a base de dados e forneceu
+                informações relevantes aos nossos usuários.</p>
+
+            <h4 class="text-center">Conclusão:</h4>
+            <p>Superar os desafios na aquisição de dados do FBI foi fundamental para o progresso bem-sucedido do nosso
+                projeto. Esses desafios nos ensinaram lições valiosas e fortaleceram nossa equipe na busca por soluções
+                inovadoras. Com determinação e a escolha das tecnologias certas, conseguimos alcançar nossos objetivos
+                na primeira etapa do desenvolvimento.</p>
+        </section>
+        <h2 class="footer"> REPOSITÓRIO <a href="https://github.com/julia-stamborovski/idwall">GITHUB</a></h2>
+
+    </main>
 </body>
+
 </html>
